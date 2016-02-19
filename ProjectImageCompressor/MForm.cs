@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,44 +10,36 @@ namespace ProjectImageCompressor
 {
 	public partial class MForm : Form
 	{
+		private static MForm _instance;
+
 		private Project _project;
-		private static MForm instance;
+		private string _projDescriptorFile;
 
 		public MForm()
 		{
+			_instance = this;
+
 			InitializeComponent();
-			instance = this;
 		}
-
-		private void MForm_Load(object sender, EventArgs e)
-		{
-
-		}
-
+		
 		private void MForm_Shown(object sender, EventArgs e)
 		{
 			SetProjectPath(Properties.Settings.Default.ProjectPath);
 			SetOutPath(Properties.Settings.Default.OutPath);
 
-			//_project = (Project)Serializator.DeserializeFromXml(File.ReadAllText("proj.xml"));
+			if (string.IsNullOrWhiteSpace(Properties.Settings.Default.ProjectPath))
+				return;
 
 			_project = new Project(Properties.Settings.Default.ProjectPath);
 
-			if (File.Exists("proj.json"))
-				_project.ValdateFromJson(JsonValue.Parse(File.ReadAllText("proj.json")));
+			_projDescriptorFile = Path.ChangeExtension(Path.GetFileName(Properties.Settings.Default.ProjectPath), ".json");
+			if (File.Exists(_projDescriptorFile))
+				_project.ValdateFromJson(JsonValue.Parse(File.ReadAllText(_projDescriptorFile)));
 
 			ProjectTreeView.Nodes.AddRange(_project.GenerateNodes().Cast<TreeNode>().ToArray());
-
-			//PRBox.Lines = Properties.Settings.Default.ProjectLines.OfType<string>().ToArray();
-
-			//_project.SetPropertyAbsolute(@".\Assets", "ScalePercent", 50);
-
-			//ProjectTreeView.SelectedNode = ProjectTreeView.Nodes[0];
-
-			//File.WriteAllText("proj.xml", Serializator.SerializeToXml(_project));
 		}
 
-		void SetProjectPath(string path)
+		private void SetProjectPath(string path)
 		{
 			path = path.Replace("\\", "/");
 
@@ -59,12 +52,12 @@ namespace ProjectImageCompressor
 			Properties.Settings.Default.Save();
 		}
 
-		void SetOutPath(string path)
+		private void SetOutPath(string path)
 		{
 			path = path.Replace("\\", "/");
 
 			if (string.IsNullOrWhiteSpace(path)
-				|| !Directory.Exists(path))
+			    || !Directory.Exists(path))
 				path = string.Empty;
 
 			OutPathBox.Text = path;
@@ -92,8 +85,6 @@ namespace ProjectImageCompressor
 
 		private void ExportButton_Click(object sender, EventArgs e)
 		{
-			//SetImagePercents();
-
 			textBox1.Text = "";
 
 			var worker = new BackgroundWorker();
@@ -103,7 +94,7 @@ namespace ProjectImageCompressor
 			{
 				_project.Export(Properties.Settings.Default.OutPath, worker.ReportProgress);
 			};
-			
+
 			ProjectGroup.Enabled = false;
 			ExportButton.Enabled = false;
 
@@ -114,23 +105,9 @@ namespace ProjectImageCompressor
 			};
 
 			worker.ProgressChanged += (o, args) => ProgressBar.Value = args.ProgressPercentage;
-			
+
 			worker.RunWorkerAsync();
 		}
-
-		//private void SetImagePercents()
-		//{
-		//	foreach (var line in Properties.Settings.Default.ProjectLines)
-		//	{
-		//		var s = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-		//		int p = int.Parse(s[s.Length - 1]);
-		//		if (p != 100)
-		//		{
-		//			var path = string.Join("",s.Take(s.Length - 1));
-		//			_project.SetPropertyAbsolute(path, "ScalePercent", p);
-		//		}
-		//	}
-		//}
 
 		private void ProjectTreeView_AfterSelect(object sender, TreeViewEventArgs e)
 		{
@@ -138,7 +115,7 @@ namespace ProjectImageCompressor
 			SelectedNode.SelectedImageIndex = (SelectedNodeObject.IsExport) ? SelectedNodeObject.GetImageIndex() : 32;
 		}
 
-		void PreviewSelectedNode()
+		private void PreviewSelectedNode()
 		{
 			var obj = SelectedNodeObject;
 
@@ -156,6 +133,10 @@ namespace ProjectImageCompressor
 				ResizeValueBox.Text = "100";
 				ResizeValueBox.Enabled = false;
 			}
+
+			PicPreview.Image = null;
+			if (obj is PImage)
+				PicPreview.Image = Image.FromFile(Properties.Settings.Default.ProjectPath + obj.AbsolutePath);
 		}
 
 		private void ObjResize_CheckedChanged(object sender, EventArgs e)
@@ -172,12 +153,6 @@ namespace ProjectImageCompressor
 			}
 		}
 
-		//private void ProjectTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-		//{
-		//	if (Color.Gray == e.Node.ForeColor)
-		//		e.Cancel = true;
-		//}
-
 		private void ObjExportFlag_CheckedChanged(object sender, EventArgs e)
 		{
 			SelectedNodeObject.IsExport = ObjExportFlag.Checked;
@@ -192,37 +167,56 @@ namespace ProjectImageCompressor
 				UpdateImageIndex(n);
 		}
 
-		TreeNode SelectedNode { get { return ProjectTreeView.SelectedNode; } }
-		PObject SelectedNodeObject { get { return (PObject)SelectedNode.Tag; } }
+		private TreeNode SelectedNode
+		{
+			get { return ProjectTreeView.SelectedNode; }
+		}
+
+		private PObject SelectedNodeObject
+		{
+			get { return (PObject)SelectedNode.Tag; }
+		}
 
 		private void SaveProj_Click(object sender, EventArgs e)
 		{
-			File.WriteAllText("proj.json", _project.ExportToJson().ToStringIdent());
+			File.WriteAllText(_projDescriptorFile, _project.ExportToJson().ToStringIdent());
 		}
 
 		private void ResizeValueBox_TextChanged(object sender, EventArgs e)
 		{
 			int i;
-			if (int.TryParse(ResizeValueBox.Text, out i))
-			{
-				SelectedNodeObject.ScalePercent = i;
-			}
+			if (!int.TryParse(ResizeValueBox.Text, out i))
+				i = 100;
+
+			if (i == 100)
+				SelectedNodeObject.RemoveProperty("ScalePercent");
 			else
-			{
-				SelectedNodeObject.ScalePercent = 100;
-			}
+				SelectedNodeObject.ScalePercent = i;
 		}
 
 		public static void Log(string text)
 		{
-			instance.Invoke(new Action(() => instance.textBox1.Text += text + Environment.NewLine));
+			_instance.Invoke(new Action(() => _instance.textBox1.Text += text + Environment.NewLine));
 		}
 
-		//private void PRBox_TextChanged(object sender, EventArgs e)
-		//{
-		//	Properties.Settings.Default.ProjectLines = new StringCollection();
-		//	Properties.Settings.Default.ProjectLines.AddRange(PRBox.Lines);
-		//	Properties.Settings.Default.Save();
-		//}
+		private void button1_Click(object sender, EventArgs e)
+		{
+			ResizeValueBox.Text = button1.Text;
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			ResizeValueBox.Text = button2.Text;
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			ResizeValueBox.Text = button3.Text;
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			ResizeValueBox.Text = button4.Text;
+		}
 	}
 }

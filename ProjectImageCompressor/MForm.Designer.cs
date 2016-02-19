@@ -37,21 +37,27 @@
 			this.OutPathBox = new System.Windows.Forms.TextBox();
 			this.OutPathSetButton = new System.Windows.Forms.Button();
 			this.ProjectTreeView = new System.Windows.Forms.TreeView();
+			this.ImagesList = new System.Windows.Forms.ImageList(this.components);
 			this.ExportButton = new System.Windows.Forms.Button();
 			this.ProgressBar = new System.Windows.Forms.ProgressBar();
 			this.ProjectGroup = new System.Windows.Forms.GroupBox();
+			this.SaveProj = new System.Windows.Forms.Button();
 			this.TreeBox = new System.Windows.Forms.GroupBox();
+			this.PicPreview = new System.Windows.Forms.PictureBox();
+			this.ResizeValueBox = new System.Windows.Forms.MaskedTextBox();
 			this.ObjName = new System.Windows.Forms.Label();
 			this.ObjResize = new System.Windows.Forms.CheckBox();
 			this.ObjExportFlag = new System.Windows.Forms.CheckBox();
 			this.ExportGroup = new System.Windows.Forms.GroupBox();
-			this.ImagesList = new System.Windows.Forms.ImageList(this.components);
-			this.SaveProj = new System.Windows.Forms.Button();
-			this.ResizeValueBox = new System.Windows.Forms.MaskedTextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.button1 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
 			this.ProjectGroup.SuspendLayout();
 			this.TreeBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PicPreview)).BeginInit();
 			this.ExportGroup.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
@@ -120,96 +126,6 @@
 			this.ProjectTreeView.Size = new System.Drawing.Size(331, 342);
 			this.ProjectTreeView.TabIndex = 6;
 			this.ProjectTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ProjectTreeView_AfterSelect);
-			// 
-			// ExportButton
-			// 
-			this.ExportButton.Location = new System.Drawing.Point(673, 19);
-			this.ExportButton.Name = "ExportButton";
-			this.ExportButton.Size = new System.Drawing.Size(75, 23);
-			this.ExportButton.TabIndex = 7;
-			this.ExportButton.Text = "Export";
-			this.ExportButton.UseVisualStyleBackColor = true;
-			this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
-			// 
-			// ProgressBar
-			// 
-			this.ProgressBar.Location = new System.Drawing.Point(9, 19);
-			this.ProgressBar.Name = "ProgressBar";
-			this.ProgressBar.Size = new System.Drawing.Size(658, 23);
-			this.ProgressBar.TabIndex = 8;
-			// 
-			// ProjectGroup
-			// 
-			this.ProjectGroup.Controls.Add(this.SaveProj);
-			this.ProjectGroup.Controls.Add(this.TreeBox);
-			this.ProjectGroup.Controls.Add(this.ProjectPathLabel);
-			this.ProjectGroup.Controls.Add(this.SetProjectPathButton);
-			this.ProjectGroup.Controls.Add(this.OutPathLabel);
-			this.ProjectGroup.Controls.Add(this.ProjectPathBox);
-			this.ProjectGroup.Controls.Add(this.OutPathBox);
-			this.ProjectGroup.Controls.Add(this.OutPathSetButton);
-			this.ProjectGroup.Location = new System.Drawing.Point(12, 12);
-			this.ProjectGroup.Name = "ProjectGroup";
-			this.ProjectGroup.Size = new System.Drawing.Size(760, 479);
-			this.ProjectGroup.TabIndex = 9;
-			this.ProjectGroup.TabStop = false;
-			this.ProjectGroup.Text = "Project";
-			// 
-			// TreeBox
-			// 
-			this.TreeBox.Controls.Add(this.ResizeValueBox);
-			this.TreeBox.Controls.Add(this.ProjectTreeView);
-			this.TreeBox.Controls.Add(this.ObjName);
-			this.TreeBox.Controls.Add(this.ObjResize);
-			this.TreeBox.Controls.Add(this.ObjExportFlag);
-			this.TreeBox.Location = new System.Drawing.Point(9, 106);
-			this.TreeBox.Name = "TreeBox";
-			this.TreeBox.Size = new System.Drawing.Size(739, 367);
-			this.TreeBox.TabIndex = 11;
-			this.TreeBox.TabStop = false;
-			this.TreeBox.Text = "Files";
-			// 
-			// ObjName
-			// 
-			this.ObjName.AutoSize = true;
-			this.ObjName.Location = new System.Drawing.Point(348, 19);
-			this.ObjName.Name = "ObjName";
-			this.ObjName.Size = new System.Drawing.Size(51, 13);
-			this.ObjName.TabIndex = 7;
-			this.ObjName.Text = "ObjName";
-			// 
-			// ObjResize
-			// 
-			this.ObjResize.AutoSize = true;
-			this.ObjResize.Location = new System.Drawing.Point(351, 58);
-			this.ObjResize.Name = "ObjResize";
-			this.ObjResize.Size = new System.Drawing.Size(58, 17);
-			this.ObjResize.TabIndex = 9;
-			this.ObjResize.Text = "Resize";
-			this.ObjResize.UseVisualStyleBackColor = true;
-			this.ObjResize.CheckedChanged += new System.EventHandler(this.ObjResize_CheckedChanged);
-			// 
-			// ObjExportFlag
-			// 
-			this.ObjExportFlag.AutoSize = true;
-			this.ObjExportFlag.Location = new System.Drawing.Point(351, 35);
-			this.ObjExportFlag.Name = "ObjExportFlag";
-			this.ObjExportFlag.Size = new System.Drawing.Size(64, 17);
-			this.ObjExportFlag.TabIndex = 8;
-			this.ObjExportFlag.Text = "IsExport";
-			this.ObjExportFlag.UseVisualStyleBackColor = true;
-			this.ObjExportFlag.CheckedChanged += new System.EventHandler(this.ObjExportFlag_CheckedChanged);
-			// 
-			// ExportGroup
-			// 
-			this.ExportGroup.Controls.Add(this.ProgressBar);
-			this.ExportGroup.Controls.Add(this.ExportButton);
-			this.ExportGroup.Location = new System.Drawing.Point(12, 497);
-			this.ExportGroup.Name = "ExportGroup";
-			this.ExportGroup.Size = new System.Drawing.Size(760, 53);
-			this.ExportGroup.TabIndex = 10;
-			this.ExportGroup.TabStop = false;
-			this.ExportGroup.Text = "Export";
 			// 
 			// ImagesList
 			// 
@@ -313,6 +229,40 @@
 			this.ImagesList.Images.SetKeyName(95, "95.ico");
 			this.ImagesList.Images.SetKeyName(96, "96.ico");
 			// 
+			// ExportButton
+			// 
+			this.ExportButton.Location = new System.Drawing.Point(673, 19);
+			this.ExportButton.Name = "ExportButton";
+			this.ExportButton.Size = new System.Drawing.Size(75, 23);
+			this.ExportButton.TabIndex = 7;
+			this.ExportButton.Text = "Export";
+			this.ExportButton.UseVisualStyleBackColor = true;
+			this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+			// 
+			// ProgressBar
+			// 
+			this.ProgressBar.Location = new System.Drawing.Point(9, 19);
+			this.ProgressBar.Name = "ProgressBar";
+			this.ProgressBar.Size = new System.Drawing.Size(658, 23);
+			this.ProgressBar.TabIndex = 8;
+			// 
+			// ProjectGroup
+			// 
+			this.ProjectGroup.Controls.Add(this.SaveProj);
+			this.ProjectGroup.Controls.Add(this.TreeBox);
+			this.ProjectGroup.Controls.Add(this.ProjectPathLabel);
+			this.ProjectGroup.Controls.Add(this.SetProjectPathButton);
+			this.ProjectGroup.Controls.Add(this.OutPathLabel);
+			this.ProjectGroup.Controls.Add(this.ProjectPathBox);
+			this.ProjectGroup.Controls.Add(this.OutPathBox);
+			this.ProjectGroup.Controls.Add(this.OutPathSetButton);
+			this.ProjectGroup.Location = new System.Drawing.Point(12, 12);
+			this.ProjectGroup.Name = "ProjectGroup";
+			this.ProjectGroup.Size = new System.Drawing.Size(760, 479);
+			this.ProjectGroup.TabIndex = 9;
+			this.ProjectGroup.TabStop = false;
+			this.ProjectGroup.Text = "Project";
+			// 
 			// SaveProj
 			// 
 			this.SaveProj.Location = new System.Drawing.Point(9, 77);
@@ -323,6 +273,34 @@
 			this.SaveProj.UseVisualStyleBackColor = true;
 			this.SaveProj.Click += new System.EventHandler(this.SaveProj_Click);
 			// 
+			// TreeBox
+			// 
+			this.TreeBox.Controls.Add(this.button3);
+			this.TreeBox.Controls.Add(this.button4);
+			this.TreeBox.Controls.Add(this.button2);
+			this.TreeBox.Controls.Add(this.button1);
+			this.TreeBox.Controls.Add(this.PicPreview);
+			this.TreeBox.Controls.Add(this.ResizeValueBox);
+			this.TreeBox.Controls.Add(this.ProjectTreeView);
+			this.TreeBox.Controls.Add(this.ObjName);
+			this.TreeBox.Controls.Add(this.ObjResize);
+			this.TreeBox.Controls.Add(this.ObjExportFlag);
+			this.TreeBox.Location = new System.Drawing.Point(9, 106);
+			this.TreeBox.Name = "TreeBox";
+			this.TreeBox.Size = new System.Drawing.Size(739, 367);
+			this.TreeBox.TabIndex = 11;
+			this.TreeBox.TabStop = false;
+			this.TreeBox.Text = "Files";
+			// 
+			// PicPreview
+			// 
+			this.PicPreview.Location = new System.Drawing.Point(351, 132);
+			this.PicPreview.Name = "PicPreview";
+			this.PicPreview.Size = new System.Drawing.Size(382, 229);
+			this.PicPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.PicPreview.TabIndex = 11;
+			this.PicPreview.TabStop = false;
+			// 
 			// ResizeValueBox
 			// 
 			this.ResizeValueBox.Location = new System.Drawing.Point(421, 55);
@@ -332,6 +310,48 @@
 			this.ResizeValueBox.TabIndex = 10;
 			this.ResizeValueBox.ValidatingType = typeof(int);
 			this.ResizeValueBox.TextChanged += new System.EventHandler(this.ResizeValueBox_TextChanged);
+			// 
+			// ObjName
+			// 
+			this.ObjName.AutoSize = true;
+			this.ObjName.Location = new System.Drawing.Point(348, 19);
+			this.ObjName.Name = "ObjName";
+			this.ObjName.Size = new System.Drawing.Size(51, 13);
+			this.ObjName.TabIndex = 7;
+			this.ObjName.Text = "ObjName";
+			// 
+			// ObjResize
+			// 
+			this.ObjResize.AutoSize = true;
+			this.ObjResize.Location = new System.Drawing.Point(351, 58);
+			this.ObjResize.Name = "ObjResize";
+			this.ObjResize.Size = new System.Drawing.Size(58, 17);
+			this.ObjResize.TabIndex = 9;
+			this.ObjResize.Text = "Resize";
+			this.ObjResize.UseVisualStyleBackColor = true;
+			this.ObjResize.CheckedChanged += new System.EventHandler(this.ObjResize_CheckedChanged);
+			// 
+			// ObjExportFlag
+			// 
+			this.ObjExportFlag.AutoSize = true;
+			this.ObjExportFlag.Location = new System.Drawing.Point(351, 35);
+			this.ObjExportFlag.Name = "ObjExportFlag";
+			this.ObjExportFlag.Size = new System.Drawing.Size(64, 17);
+			this.ObjExportFlag.TabIndex = 8;
+			this.ObjExportFlag.Text = "IsExport";
+			this.ObjExportFlag.UseVisualStyleBackColor = true;
+			this.ObjExportFlag.CheckedChanged += new System.EventHandler(this.ObjExportFlag_CheckedChanged);
+			// 
+			// ExportGroup
+			// 
+			this.ExportGroup.Controls.Add(this.ProgressBar);
+			this.ExportGroup.Controls.Add(this.ExportButton);
+			this.ExportGroup.Location = new System.Drawing.Point(12, 497);
+			this.ExportGroup.Name = "ExportGroup";
+			this.ExportGroup.Size = new System.Drawing.Size(760, 53);
+			this.ExportGroup.TabIndex = 10;
+			this.ExportGroup.TabStop = false;
+			this.ExportGroup.Text = "Export";
 			// 
 			// groupBox1
 			// 
@@ -352,6 +372,46 @@
 			this.textBox1.Size = new System.Drawing.Size(739, 219);
 			this.textBox1.TabIndex = 0;
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(527, 54);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(28, 23);
+			this.button1.TabIndex = 13;
+			this.button1.Text = "12";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(561, 53);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(28, 23);
+			this.button2.TabIndex = 14;
+			this.button2.Text = "25";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(630, 53);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(28, 23);
+			this.button3.TabIndex = 16;
+			this.button3.Text = "75";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(595, 53);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(28, 23);
+			this.button4.TabIndex = 15;
+			this.button4.Text = "50";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
+			// 
 			// MForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,12 +425,12 @@
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "ProjectImageCompressor";
-			this.Load += new System.EventHandler(this.MForm_Load);
 			this.Shown += new System.EventHandler(this.MForm_Shown);
 			this.ProjectGroup.ResumeLayout(false);
 			this.ProjectGroup.PerformLayout();
 			this.TreeBox.ResumeLayout(false);
 			this.TreeBox.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PicPreview)).EndInit();
 			this.ExportGroup.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -400,6 +460,11 @@
 		private System.Windows.Forms.MaskedTextBox ResizeValueBox;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.PictureBox PicPreview;
+		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button button1;
 	}
 }
 

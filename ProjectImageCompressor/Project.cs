@@ -330,6 +330,8 @@ namespace ProjectImageCompressor
 			Directory.SetCurrentDirectory(path);
 
 			RootDirectory = new PDirectory(".", null);
+
+			// дефолтные свойства чтобы наследовались
 			RootDirectory.IsExport = true;
 			RootDirectory.ScalePercent = 100;
 
@@ -390,15 +392,14 @@ namespace ProjectImageCompressor
 			node.Tag = obj;
 			node.ImageIndex = (obj.IsExport) ? obj.GetImageIndex() : 32;
 			node.SelectedImageIndex = node.ImageIndex;
-			obj.Childs.ForEach(x => node.Nodes.Add(GenerateNode(x)));
+			obj.Childs.ForEach(x =>
+			{
+				if (x is PDirectory || x is PImage)
+					node.Nodes.Add(GenerateNode(x));
+			});
 			return node;
 		}
-
-		//public void SetPropertyAbsolute(string absolutePath, string name, object value)
-		//{
-		//	_rootDirectory.SetPropertyAbsolute(absolutePath, name, value);
-		//}
-
+		
 		public string ProjectPath { get; private set; }
 		public string OutPath { get; private set; }
 
@@ -412,12 +413,7 @@ namespace ProjectImageCompressor
 
 		static void ExportToJson(JsonValue arr, PObject obj)
 		{
-			//var objJ = new JsonValue();
-			//
-			//foreach (var property in obj.Properties)
-			//	objJ[property.Key] = (JsonValue)property.Value;
-
-			arr[obj.AbsolutePath] = GJson.Serializator.Serialize(obj.Properties);
+			arr[obj.AbsolutePath] = Serializator.Serialize(obj.Properties);
 
 			obj.Childs.ForEach( x => ExportToJson(arr, x ));
 		}
